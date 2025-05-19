@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Présence Form</title>
+</head>
+<body>
+    <h1>Présence Form</h1>
+    <form id="presenceForm">
+        <input type="text" id="prof" placeholder="Prof" required><br>
+        <input type="date" id="date" required><br>
+        <input type="text" id="candidat" placeholder="Candidat" required><br>
+        <select id="present" required>
+            <option value="">Présent ?</option>
+            <option value="Oui">Oui</option>
+            <option value="Non">Non</option>
+        </select><br><br>
+        <button type="submit">Envoyer</button>
+    </form>
+
+    <script>
+        document.getElementById('presenceForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const prof = document.getElementById('prof').value;
+            const date = document.getElementById('date').value;
+            const candidat = document.getElementById('candidat').value;
+            const present = document.getElementById('present').value;
+
+            const response = await fetch('http://localhost:3000/submit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    Title: prof,
+                    Date: date,
+                    Candidat: candidat,
+                    Pr_x00e9_sent: present
+                })
+            });
+
+            const data = await response.json();
+            alert(JSON.stringify(data, null, 2));
+        });
+    </script>
+</body>
+</html>
