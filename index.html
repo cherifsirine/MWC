@@ -27,19 +27,31 @@
             const candidat = document.getElementById('candidat').value;
             const present = document.getElementById('present').value;
 
-            const response = await fetch('http://localhost:3000/submit', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    Title: prof,
-                    Date: date,
-                    Candidat: candidat,
-                    Pr_x00e9_sent: present
-                })
-            });
+            const API_URL = 'https://sharepoint-web-app-production.up.railway.app/submit';
 
-            const data = await response.json();
-            alert(JSON.stringify(data, null, 2));
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        Title: prof,
+                        Date: date,
+                        Candidat: candidat,
+                        Pr_x00e9_sent: present
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Une erreur est survenue : ' + response.statusText);
+                }
+
+                const data = await response.json();
+                alert('Succès : ' + JSON.stringify(data, null, 2));
+
+            } catch (error) {
+                console.error(error);
+                alert('Erreur : ' + error.message);
+            }
         });
     </script>
 </body>
