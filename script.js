@@ -1,1 +1,1 @@
-const API_URL = 'https://your-deployed-backend-url/submit';
+const API_URL = 'https://mwc-production.up.railway.app/submit';
