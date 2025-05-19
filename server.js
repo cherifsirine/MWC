@@ -55,5 +55,5 @@ app.post('/submit', async (req, res) => {
 // ✅ Server start confirmation
 const port = process.env.PORT || 8080;
 app.listen(port, () => {
-    console.log(`✅ Server running at http://localhost:${port}`);
+    console.log(`✅ Server running on port ${port}. Accessible via Railway public URL.`);
 });
